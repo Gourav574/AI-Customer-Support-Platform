@@ -1,0 +1,5 @@
+-r requirements.txt
+# Optional local semantic embedding/index provider. Model weights are cached only
+# after an explicit prefetch or an upload with EMBEDDING_DOWNLOAD_MODEL=true.
+sentence-transformers>=3.0,<6
+faiss-cpu>=1.8,<2

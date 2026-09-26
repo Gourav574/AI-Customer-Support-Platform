@@ -1,0 +1,3 @@
+Refund policy
+
+Customers may ask the Billing team to review refund eligibility. An agent must confirm the order identifier, payment status, return status, and applicable purchase terms in the billing system before promising a refund or a processing date. Never request a full payment card number. When the knowledge base does not answer a specific eligibility question, escalate it to a manager.

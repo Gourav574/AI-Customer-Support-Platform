@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: customer_support_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - supportiq_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d customer_support_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  backend:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/customer_support_db
+      SECRET_KEY: ${SECRET_KEY:-local-compose-secret-change-me}
+      SEED_DEMO: ${SEED_DEMO:-true}
+      UPLOAD_DIR: /app/uploads
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+      EMBEDDING_DOWNLOAD_MODEL: ${EMBEDDING_DOWNLOAD_MODEL:-false}
+      OCR_ENABLED: ${OCR_ENABLED:-false}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  supportiq_db:

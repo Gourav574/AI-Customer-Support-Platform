@@ -1,0 +1,3 @@
+Shipping and delivery support
+
+For a delayed shipment, verify the order identifier and the latest carrier scan. Share only the delivery estimate shown by the carrier. If tracking has not updated for several business days or the carrier marks a parcel delivered but the customer cannot locate it, open a carrier investigation and keep the ticket open until the next step is confirmed.
